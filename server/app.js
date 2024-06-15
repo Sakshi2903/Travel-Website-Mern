@@ -6,13 +6,10 @@ const app = express();
 dotenv.config({path: './config.env'});
 
 //backend connection
-const DB = process.env.DATABASE;
+require('./db/conn');
 
-mongoose.connect(DB).then(() => {
-    console.log(`Connection Success!`);
-}).catch((err) => {
-    console.log(`no connection`);
-});
+
+const PORT = process.env.PORT;
 
 //Middleware
 const middleware = (req, res, next) => {
@@ -41,6 +38,6 @@ app.get('/signup', (req, res) => {
     res.send("Hello world from register");
 });
 
-app.listen(3000, () => {
-    console.log(`server is running on port 3000`);
+app.listen(PORT, () => {
+    console.log(`server is running on port PORT`);
 });
