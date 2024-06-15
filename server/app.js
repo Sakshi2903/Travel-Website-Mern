@@ -7,7 +7,17 @@ dotenv.config({path: './config.env'});
 
 //backend connection
 require('./db/conn');
+// const User = require('./model/userSchema');
 
+//so that application understands json
+//middleware
+// this position is fixed for this
+// if written somewhere else doesn't works
+app.use(express.json());
+
+// we link the router files to make our route easy
+// middleware
+app.use(require('./router/auth'));
 
 const PORT = process.env.PORT;
 
@@ -19,7 +29,7 @@ const middleware = (req, res, next) => {
 middleware();
 
 app.get('/', (req, res) => {
-    res.send("Hello world from home");
+    res.send("Hello world from home app.js");
 });
 
 app.get('/about', middleware, (req, res) => {
