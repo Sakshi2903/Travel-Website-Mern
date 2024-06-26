@@ -65,6 +65,12 @@ router.post('/login',  async (req, res) => {
         token = await userLogin.generateAuthToken();
         console.log(token);
 
+        res.cookie("jwtoken", token, {
+            // after 30 days it expires (time in ms)
+            expires: new Date(Date.now() + 25892000000),      
+            httpOnly: true
+        });
+
         if(isMatch) {
             res.status(201).json({message: "User Logged in successfully!"});
         }
