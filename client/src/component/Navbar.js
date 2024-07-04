@@ -1,13 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {NavLink} from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Navbar = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      
+      <nav className="navbar navbar-expand-lg">
         <NavLink className="navbar-brand" href="#">
-          Navbar
+          WanderLust
         </NavLink>
         <button
           className="navbar-toggler"
@@ -20,14 +22,12 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href=
-              "/">
-                Home
-              </a>
+          <li className="nav-item">
+              <NavLink class="nav-link" to="/">
+              <span>Home</span>
+              </NavLink>
             </li>
             <li className="nav-item">
               <NavLink class="nav-link" to="/about">

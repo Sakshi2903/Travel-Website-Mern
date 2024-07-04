@@ -7,6 +7,7 @@ import Login from './component/Login';
 import Signup from './component/Signup';
 import About from './component/About';
 import {Route, Routes} from "react-router-dom";
+import "./App.css";
 
 const App = () => {
   return (
