@@ -79,7 +79,7 @@ const Home = () => {
             <div class="col-md-8 col-sm-6 col-xs-12">
               <p class="copyright-text">
                 Copyright &copy; 2024 All Rights Reserved by <br/>
-                <a href="#">Sakshi Kulkarni</a>.
+                <a href="https://www.linkedin.com/in/sakshikulkarni29">Sakshi Kulkarni</a>.
               </p>
             </div>
 

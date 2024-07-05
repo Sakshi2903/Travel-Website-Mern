@@ -6,6 +6,7 @@ import Contact from './component/Contact';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import About from './component/About';
+import ErrorPage from './component/ErrorPage';
 import {Route, Routes} from "react-router-dom";
 import "./App.css";
 
@@ -20,6 +21,7 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="*" element={<ErrorPage />}></Route>
           </Routes>
     </>
   )
