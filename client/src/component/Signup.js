@@ -1,11 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import signpic from "../images/signup.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Signup = () => {
 
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
-    name:"",email:"",phone:"",work:"",password:"",cpassword:""
+    name: "",
+    email: "",
+    phone: "",
+    work: "",
+    password: "",
+    cpassword: "",
   });
 
   let name, value;
@@ -14,117 +21,170 @@ const Signup = () => {
     console.log(e);
     name = e.target.name;
     value = e.target.value;
-    setUser({ ...user, [name]:value});
+    setUser({ ...user, [name]: value });
   }
 
+  const PostData = async (e) => {
+      e.preventDefault();
+
+      const {name, email, phone, work, password, cpassword} = user;
+      if(!name || !email || !phone || !work || !password || !cpassword)
+      {
+        window.alert("All Fields are mandatory!")
+        window.alert("Registration Failed!");
+        console.log("Registration Failed!");
+      }
+      else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email))
+      {
+        window.alert("Invalid Email Address!")
+      }
+      else if(password !== cpassword)
+      {
+        window.alert("Passwords does not match!")
+        window.alert("Registration Failed!");
+        console.log("Registration Failed!");
+      }
+      else
+      {
+        const res = await fetch("/register", {
+          method: "POST",
+          headers:{
+            "Content-Type" : "application/json"
+          },
+          body: JSON.stringify({
+            name, email, phone, work, password, cpassword
+          })
+        });
+        console.log(res)
+        if(res.status === 422)
+        {
+          window.alert("User already exists, registration failed!");
+          window.location.reload();
+        }
+        else if(res.status === 201)
+        {
+          window.alert("Registration Success!");
+          console.log("Registration Success!");
+
+          navigate('/login');
+        }
+      }
+        
+    }
 
   return (
     <div>
-      <section className="signup">      
-      <h2 className="form-title"> Signup </h2>
+      <section className="signup">
+        <h2 className="form-title"> Signup </h2>
         <div className="container mt-4">
           <div className="signup-content">
             <div className="signup-form">
-              <form className="register-form" id="register-form">
+              <form method="POST" className="register-form" id="register-form">
                 <div class="form-group">
-                <label for="inputName">
-                  <i class="zmdi zmdi-account"></i>
-                </label>
+                  <label for="name">
+                    <i class="zmdi zmdi-account"></i>
+                  </label>
                   <input
                     type="text"
                     class="form-control"
-                    id="inputName"
+                    id="name"
+                    name="name"
                     autoComplete="off"
-                    value={user.inputName}
+                    value={user.name}
                     onChange={handleInputs}
                     placeholder="Your Name"
                   />
                 </div>
                 <div class="form-group">
-                <label for="inputEmail">
-                  <i class="zmdi zmdi-email"></i>
-                </label>
+                  <label for="email">
+                    <i class="zmdi zmdi-email"></i>
+                  </label>
                   <input
                     type="email"
                     class="form-control"
-                    id="inputEmail"
+                    id="email"
+                    name="email"
                     autoComplete="off"
-                    value={user.inputEmail}
+                    value={user.email}
                     onChange={handleInputs}
                     placeholder="Your Email"
                   />
                 </div>
                 <div class="form-group">
-                <label for="inputMobileno">
-                  <i class="zmdi zmdi-phone"></i>
-                </label>
+                  <label for="phone">
+                    <i class="zmdi zmdi-phone"></i>
+                  </label>
                   <input
                     type="text"
                     class="form-control"
-                    id="inputMobileno"
+                    id="phone"
+                    name="phone"
                     autoComplete="off"
-                    value={user.inputMobileno}
+                    value={user.phone}
                     onChange={handleInputs}
-                    placeholder="Mobile Number"
+                    placeholder="Your Phone"
                   />
                 </div>
                 <div class="form-group">
-                <label for="inputwork">
-                <i class="zmdi zmdi-card-travel"></i>
-                </label>
+                  <label for="work">
+                    <i class="zmdi zmdi-card-travel"></i>
+                  </label>
                   <input
                     type="text"
                     class="form-control"
-                    id="inputWork"
+                    id="work"
+                    name="work"
                     autoComplete="off"
-                    value={user.inputWork}
+                    value={user.work}
                     onChange={handleInputs}
                     placeholder="Profession"
                   />
                 </div>
                 <div class="form-group">
-                <label for="inputName">
-                <i class="zmdi zmdi-lock-open"></i>
-                </label>
+                  <label for="password">
+                    <i class="zmdi zmdi-lock-open"></i>
+                  </label>
                   <input
                     type="password"
                     class="form-control"
-                    id="inputPassword"
+                    id="password"
+                    name="password"
                     autoComplete="off"
-                    value={user.inputPassword}
+                    value={user.password}
                     onChange={handleInputs}
                     placeholder="Password"
                   />
                 </div>
                 <div class="form-group">
-                <label for="inputName">
-                <i class="zmdi zmdi-lock"></i>
-                </label>
+                  <label for="cpassword">
+                    <i class="zmdi zmdi-lock"></i>
+                  </label>
                   <input
                     type="password"
                     class="form-control"
-                    id="inputcPass"
+                    id="cpassword"
+                    name="cpassword"
                     autoComplete="off"
-                    value={user.inputcPass}
+                    value={user.cpassword}
                     onChange={handleInputs}
                     placeholder="Confirm your password"
                   />
                 </div>
                 <div class="form-group">
-                <button type="submit" class="register-btn">
-                  Register
-                </button>
+                  <input type="submit" name="signup" className="register-btn" value="Register" onClick={PostData} />
                 </div>
                 <div class="login-link">
-                <NavLink to="/login" className="signup-image-link">I already have an account</NavLink>
+                  <NavLink to="/login" className="signup-image-link">
+                    I already have an account
+                  </NavLink>
                 </div>
               </form>
             </div>
-             <div className="signup-image">
-                <figure>
-                  <img src={signpic} alt="registration pic" width="75%"/>
-                </figure>
-                </div>
+            <div className="signup-image">
+              <figure>
+                <img src={signpic} alt="registration pic" width="75%" />
+              </figure>
+            </div>
           </div>
         </div>
       </section>

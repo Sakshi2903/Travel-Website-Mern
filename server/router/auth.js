@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authenticate = require("../middleware/authenticate");
+
 
 require('../db/conn');
 const User = require("../model/userSchema");
@@ -13,27 +15,18 @@ router.get('/', (req, res) => {
 // registration using async await 
 router.post('/register',  async (req, res) => {
     const {name, email, phone, work, password, cpassword} = req.body;
-    
-    if( !name || !email || !phone || !work || !password || !cpassword)
-    {
-        return res.status(422).json({error:"all fields are mandatory!"});
-    }
 
     try{
         const userExist = await User.findOne({email:email});
         
         if(userExist) {
-            return res.status(422).json({error:"Email already exists"});
-        }else if(password != cpassword){
-            return res.status(422).json({error:"Password doesn't match"});
+            return res.status(422).json("user Already exists!");
         }
-        else{
             const user = new User({name, email, phone, work, password, cpassword});
             // hashing pswd and storing so doesn't gets lost
             await user.save();
 
-            res.status(201).json({message: "User registered successfully!"});
-        }
+            res.status(201).json(201);
     }
     catch(err){
         console.log(err);
@@ -42,7 +35,7 @@ router.post('/register',  async (req, res) => {
 });
 
 // login using async await 
-router.post('/login',  async (req, res) => {
+router.post('/signin',  async (req, res) => {
     try{
         let token;
 
@@ -50,7 +43,7 @@ router.post('/login',  async (req, res) => {
     
         if( !email || !password )
         {
-            return res.status(422).json({error:"all fields are mandatory!"});
+            return res.status(400).json({error:"all fields are mandatory!"});
         }
 
         const userLogin = await User.findOne({email:email});
@@ -76,13 +69,18 @@ router.post('/login',  async (req, res) => {
         }
         else
         {
-            res.status(500).json({error: "Incorrect email/password"});
+            res.status(400).json({error: "Incorrect email/password"});
         }
     }
     catch(err){
         console.log(err);
     }
 
+});
+
+//about page
+router.get('/about', authenticate, (req, res) => {
+    res.send("Hello world from about");
 });
 
 module.exports = router;

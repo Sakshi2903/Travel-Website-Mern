@@ -28,77 +28,77 @@ const Home = () => {
       {/* destination section */}
       <br />
       <h2 className="form-title"> Explore Destinations </h2>
-      <div class="imageGrid" id="imageGrid">
-        <div class="tile imagegr1">
-          <div class="textWrapper">
+      <div className="imageGrid" id="imageGrid">
+        <div className="tile imagegr1">
+          <div className="textWrapper">
             <h2>Greese</h2>
-            <div class="content">
+            <div className="content">
             </div>
           </div>
         </div>
-        <div class="tile imagegr2">
-          <div class="textWrapper">
+        <div className="tile imagegr2">
+          <div className="textWrapper">
             <h2>Paris</h2>
-            <div class="content">
+            <div className="content">
             </div>
           </div>
         </div>
-        <div class="tile imagegr3">
-          <div class="textWrapper">
+        <div className="tile imagegr3">
+          <div className="textWrapper">
             <h2>Rome</h2>
-            <div class="content">
+            <div className="content">
             </div>
           </div>
         </div>
-        <div class="tile imagegr4">
-          <div class="textWrapper">
+        <div className="tile imagegr4">
+          <div className="textWrapper">
             <h2>Turkey</h2>
-            <div class="content">
+            <div className="content">
             </div>
           </div>
         </div>
-        <div class="tile imagegr5">
-          <div class="textWrapper">
+        <div className="tile imagegr5">
+          <div className="textWrapper">
             <h2>Tokyo</h2>
-            <div class="content">
+            <div className="content">
               </div>
           </div>
         </div>
-        <div class="tile imagegr6">
-          <div class="textWrapper">
+        <div className="tile imagegr6">
+          <div className="textWrapper">
             <h2>Varanasi</h2>
-            <div class="content"></div>
+            <div className="content"></div>
           </div>
         </div>
       </div>
 
       {/* footer */}
-      <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">
+      <footer className="site-footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-6 col-xs-12">
+              <p className="copyright-text">
                 Copyright &copy; 2024 All Rights Reserved by <br/>
                 <a href="https://www.linkedin.com/in/sakshikulkarni29">Sakshi Kulkarni</a>.
               </p>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <ul className="social-icons">
                 <li className="icon-single">
-                <i class="zmdi zmdi-linkedin-box"></i>
+                <i className="zmdi zmdi-linkedin-box"></i>
                 </li>
                 <li className="icon-single">
-                <i class="zmdi zmdi-facebook-box"></i>
+                <i className="zmdi zmdi-facebook-box"></i>
                 </li>
                 <li className="icon-single">
-                <i class="zmdi zmdi-github"></i>
+                <i className="zmdi zmdi-github"></i>
                 </li>
                 <li className="icon-single">
-                <i class="zmdi zmdi-pinterest-box"></i>
+                <i className="zmdi zmdi-pinterest-box"></i>
                 </li>
                 <li className="icon-single">
-                <i class="zmdi zmdi-twitter-box"></i>
+                <i className="zmdi zmdi-twitter-box"></i>
                 </li>
               </ul>
             </div>
