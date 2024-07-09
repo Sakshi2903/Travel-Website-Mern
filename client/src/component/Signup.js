@@ -36,6 +36,14 @@ const Signup = () => {
       {
         window.alert("Invalid Email Address!")
       }
+      else if(!/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i.test(phone))
+      {
+        window.alert("Invalid Phone number!")
+      }
+      else if(!/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/i.test(password))
+      {
+        window.alert("Password must contain one digit, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long.")
+      }
       else if(password !== cpassword)
       {
         window.alert("Passwords does not match, Registration Failed!")
