@@ -30,9 +30,7 @@ const Signup = () => {
       const {name, email, phone, work, password, cpassword} = user;
       if(!name || !email || !phone || !work || !password || !cpassword)
       {
-        window.alert("All Fields are mandatory!")
-        window.alert("Registration Failed!");
-        console.log("Registration Failed!");
+        window.alert("All Fields are mandatory, Registration Failed!")
       }
       else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email))
       {
@@ -40,9 +38,7 @@ const Signup = () => {
       }
       else if(password !== cpassword)
       {
-        window.alert("Passwords does not match!")
-        window.alert("Registration Failed!");
-        console.log("Registration Failed!");
+        window.alert("Passwords does not match, Registration Failed!")
       }
       else
       {

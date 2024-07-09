@@ -40,17 +40,11 @@ router.post('/signin',  async (req, res) => {
         let token;
 
         const {email, password} = req.body;
-    
-        if( !email || !password )
-        {
-            return res.status(400).json({error:"all fields are mandatory!"});
-        }
-
         const userLogin = await User.findOne({email:email});
 
         if(!userLogin)
             {
-                    return res.status(400).json({ error: "Please registered first" });
+                    return res.status(400).json(400);
             }
 
         const isMatch = await bcrypt.compare(password, userLogin.password);
@@ -65,11 +59,11 @@ router.post('/signin',  async (req, res) => {
         });
 
         if(isMatch) {
-            res.status(201).json({message: "User Logged in successfully!"});
+            res.status(201).json(201);
         }
         else
         {
-            res.status(400).json({error: "Incorrect email/password"});
+            res.status(402).json(402);
         }
     }
     catch(err){

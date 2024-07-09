@@ -24,28 +24,37 @@ const Login = () => {
       e.preventDefault();
 
       const {email, password} = user;
-      console.log(user);
-      const res = await fetch("/signin", {
-        method: "POST",
-        headers:{
-          "Content-Type" : "application/json"
-        },
-        body: JSON.stringify({
-          email, password
-        })
-      });
+      if(!email || !password)
+      {
+          window.alert("All fields are compulsory, login failed!")
+      }
+      else{
+        const res = await fetch("/signin", {
+          method: "POST",
+          headers:{
+            "Content-Type" : "application/json"
+          },
+          body: JSON.stringify({
+            email, password
+          })
+        });
 
-      const data = await res.json();
-      console.log(data);
-      if(data.status === 400 || !(data)){
-        window.alert("Login Failed!");
-        console.log("Login Failed!");
-        return
-      }else{
-        window.alert("Login Success!");
-        console.log("Login Success!");
-
-        navigate('/');
+        if(res.status === 400)
+          {
+            window.alert("User does not exists, Please register first!");
+            navigate('/signup');
+          }
+          else if(res.status === 201)
+          {
+            window.alert("You have successfully logged in!");
+  
+            navigate('/');
+          }
+          else if(res.status === 402)
+            {
+              window.alert("Incorrect Username/Password!");
+              window.location.reload();
+            }
       }
   }
 
