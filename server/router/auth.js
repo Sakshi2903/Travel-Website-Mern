@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const authenticate = require("../middleware/authenticate");
 
 
+
 require('../db/conn');
 const User = require("../model/userSchema");
 
@@ -54,7 +55,7 @@ router.post('/signin',  async (req, res) => {
 
         res.cookie("jwtoken", token, {
             // after 30 days it expires (time in ms)
-            expires: new Date(Date.now() + 25892000000),      
+            expires: new Date(Date.now() + 60000),      
             httpOnly: true
         });
 
@@ -73,8 +74,9 @@ router.post('/signin',  async (req, res) => {
 });
 
 //about page
-router.get('/about', authenticate, (req, res) => {
-    res.send("Hello world from about");
+router.get('/profiles', authenticate, (req, res) => {
+    res.send(req.rootUser);
+    router.use(cookieParser())
 });
 
 module.exports = router;
