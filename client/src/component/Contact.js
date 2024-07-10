@@ -1,7 +1,83 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 const Contact = () => {
+  const [userData, setUserData] = useState({name:"", email:"", phone:"", message:""});
+
+  const callContactPage = async () => {
+    try {
+      const res = await fetch("/getData", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setUserData({...userData, name:data.name, email:data.email, phone:data.phone});
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    callContactPage();
+  }, []);
+
+  // storing data
+  const handleInputs = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUserData({...userData, [name]:value });
+  }
+
+  // sending data to backend
+  const contactForm = async (e) => {
+    e.preventDefault();
+
+    const {name, email, phone, message} = userData;
+
+    if(!name || !email || !phone || !message)
+      {
+        window.alert("All Fields are mandatory, Message not sent!")
+      }
+      else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email))
+      {
+        window.alert("Invalid Email Address!")
+      }
+      else if(!/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i.test(phone))
+      {
+        window.alert("Invalid Phone number!")
+      }
+      else
+      {
+        const res = await fetch('/contact', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name, email, phone, message
+          })
+        });
+    
+        console.log(message);
+    
+        if(res.status === 400)
+          {
+            window.alert("User does not exists, message not sent!");
+          }
+          else if(res.status === 201)
+          {
+            window.alert("Message sent sccessfully!");
+          }
+      }
+
+    
+  }
+
   return (
     <>
       <div className="container">
@@ -18,6 +94,8 @@ const Contact = () => {
                     name="name"
                     autoComplete="off"
                     placeholder="Name"
+                    value={userData.name}
+                    onChange={handleInputs}
                   />
                 </div>
                 <div class="form-group form-elem">
@@ -28,6 +106,8 @@ const Contact = () => {
                     name="email"
                     autoComplete="off"
                     placeholder="Email"
+                    value={userData.email}
+                    onChange={handleInputs}
                   />
                 </div>
                 <div class="form-group form-elem">
@@ -38,6 +118,8 @@ const Contact = () => {
                     name="phone"
                     autoComplete="off"
                     placeholder="Phone"
+                    value={userData.phone}
+                    onChange={handleInputs}
                   />
                 </div>
                 </div>
@@ -49,10 +131,11 @@ const Contact = () => {
                     name="message"
                     autoComplete="off"
                     placeholder="Message"
+                    onChange={handleInputs}
                   />
                 </div>
                 <div class="form-group">
-                  <input type="submit" name="query-submit" className="register-btn" value="Send" />
+                  <input type="submit" name="query-submit" className="register-btn" value="Send" onClick={contactForm}/>
                 </div>
               </form>
           </div>

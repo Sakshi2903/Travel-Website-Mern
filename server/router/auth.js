@@ -54,8 +54,8 @@ router.post('/signin',  async (req, res) => {
         console.log(token);
 
         res.cookie("jwtoken", token, {
-            // after 30 days it expires (time in ms)
-            expires: new Date(Date.now() + 60000),      
+            // after 1 day it expires (time in ms)
+            expires: new Date(Date.now() + 86400000),      
             httpOnly: true
         });
 
@@ -77,6 +77,35 @@ router.post('/signin',  async (req, res) => {
 router.get('/profiles', authenticate, (req, res) => {
     res.send(req.rootUser);
     router.use(cookieParser())
+});
+
+//contact and home root
+router.get('/getData', authenticate, (req, res) => {
+    res.send(req.rootUser);
+});
+
+router.post('/contact', authenticate, async (req, res) => {
+    try{
+        const {name, email, phone, message} = req.body;
+        const userContact = await User.findOne({email:email});
+        if(userContact)
+        {
+            const userMessage = await userContact.addMessage(name, email, phone, message);
+            await userContact.save();
+
+            res.status(201).json(201);
+        }
+        else if(!userContact)
+        {
+            return res.status(400).json(400);
+        }
+
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
 });
 
 module.exports = router;

@@ -22,4 +22,18 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/getData',
+    createProxyMiddleware({
+      target: 'http://localhost:3000/getData',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    '/contact',
+    createProxyMiddleware({
+      target: 'http://localhost:3000/contact',
+      changeOrigin: true,
+    })
+  );
 };
