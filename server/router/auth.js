@@ -56,7 +56,7 @@ router.post('/signin',  async (req, res) => {
         res.cookie("jwtoken", token, {
             // after 1 day it expires (time in ms)
             expires: new Date(Date.now() + 86400000),      
-            httpOnly: true
+            httpOnly: false
         });
 
         if(isMatch) {
@@ -79,9 +79,16 @@ router.get('/profiles', authenticate, (req, res) => {
     router.use(cookieParser())
 });
 
+//logout option
+router.get('/logouts', authenticate, (req, res) => {
+    res.clearCookie('jwtoken', {path:'/'});
+    res.status(200).send(200);
+});
+
 //contact and home root
-router.get('/getData', authenticate, (req, res) => {
+router.get('/getData', (req, res) => {
     res.send(req.rootUser);
+    
 });
 
 router.post('/contact', authenticate, async (req, res) => {

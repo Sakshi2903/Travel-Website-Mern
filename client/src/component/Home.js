@@ -1,15 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink } from "react-router-dom";
-import goa from "../images/goa.jpg";
-import greese from "../images/Greece.jpg";
-import iceland from "../images/Iceland.jpg";
-import italy from "../images/italy.jpg";
-import varanasi from "../images/Varanasi.jpg";
-import japan from "../images/Japan.jpg";
-import paris from "../images/paris.jpg";
-import rome from "../images/rome.jpg";
-import tokyo from "../images/tokyo.jpg";
-import turkey from "../images/Turkey.jpg";
 
 const Home = () => {
   return (

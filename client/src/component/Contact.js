@@ -13,7 +13,6 @@ const Contact = () => {
       });
 
       const data = await res.json();
-      console.log(data);
       setUserData({...userData, name:data.name, email:data.email, phone:data.phone});
 
     } catch (err) {

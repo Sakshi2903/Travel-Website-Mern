@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import {userContext} from "../App";
 
 const Profile = () => {
+  
+  const {state, dispatch} = useContext(userContext);
+  dispatch({type:"USER", payload:true})
+
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
 
