@@ -38,9 +38,9 @@ Home Page
 About Page
 ![image](https://github.com/user-attachments/assets/5985e648-f04e-4a72-8938-a0039470d0be)
 Profile Page
-![image](https://github.com/user-attachments/assets/16e7ba0f-9701-4801-b4e4-c2daeeacfcdc)
+![image](https://github.com/user-attachments/assets/979aba6d-f29c-4b33-bade-252d5972cafc)
 Contact Page
-![image](https://github.com/user-attachments/assets/786eb4bb-26e2-456b-be1a-b03e1667681d)
+![image](https://github.com/user-attachments/assets/287ab851-2bd1-478e-a3a9-fbbfac9cafb3)
 Login
 ![image](https://github.com/user-attachments/assets/acc8661f-352e-4f6a-8c84-a8cd96b56d6b)
 Register
