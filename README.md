@@ -40,7 +40,7 @@ About Page
 Profile Page
 ![image](https://github.com/user-attachments/assets/979aba6d-f29c-4b33-bade-252d5972cafc)
 Contact Page
-![image](https://github.com/user-attachments/assets/287ab851-2bd1-478e-a3a9-fbbfac9cafb3)
+![image](https://github.com/user-attachments/assets/1631f8c7-a7dc-4eea-8b70-fec8d8dce4d5)
 Login
 ![image](https://github.com/user-attachments/assets/acc8661f-352e-4f6a-8c84-a8cd96b56d6b)
 Register
