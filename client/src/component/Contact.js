@@ -5,15 +5,15 @@ const Contact = () => {
 
   const callContactPage = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch("/getdata", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          Accept: "application/json"
         }
       });
 
       const data = await res.json();
-      setUserData({...userData, name:data.name, email:data.email, phone:data.phone});
+      setUserData(data);
 
     } catch (err) {
       console.log(err);

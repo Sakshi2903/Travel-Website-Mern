@@ -86,9 +86,8 @@ router.get('/logouts', authenticate, (req, res) => {
 });
 
 //contact and home root
-router.get('/getData', (req, res) => {
+router.get('/getData', authenticate, (req, res) => {
     res.send(req.rootUser);
-    
 });
 
 router.post('/contact', authenticate, async (req, res) => {
